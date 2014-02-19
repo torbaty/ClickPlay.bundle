@@ -1,0 +1,31 @@
+HTTP_HEADERS = {
+	'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 6_1_3 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B329 Safari/8536.25'
+}
+
+####################################################################################################
+def NormalizeURL(url):
+
+	return url.split('#')[0].split('?')[0]
+
+####################################################################################################
+def MetadataObjectForURL(url):
+
+	vk_url = GetVKURL(url)
+	return URLService.MetadataObjectForURL(vk_url)
+
+####################################################################################################
+def MediaObjectsForURL(url):
+
+	vk_url = GetVKURL(url)
+	return URLService.MediaObjectsForURL(vk_url)
+
+####################################################################################################
+def GetVKURL(url):
+
+	html = HTML.ElementFromURL(url, headers=HTTP_HEADERS)
+	vk_iframe = html.xpath('//iframe[contains(@src, "http://vk.com/video_ext.php")]/@src')
+
+	if len(vk_iframe) < 1:
+		raise Ex.MediaNotAvailable
+
+	return vk_iframe[0]
