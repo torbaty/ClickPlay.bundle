@@ -11,13 +11,21 @@ def NormalizeURL(url):
 def MetadataObjectForURL(url):
 
 	vk_url = GetVKURL(url)
-	return URLService.MetadataObjectForURL(vk_url)
+
+	if vk_url:
+		return URLService.MetadataObjectForURL(vk_url)
+	else:
+		return None
 
 ####################################################################################################
 def MediaObjectsForURL(url):
 
 	vk_url = GetVKURL(url)
-	return URLService.MediaObjectsForURL(vk_url)
+
+	if vk_url:
+		return URLService.MediaObjectsForURL(vk_url)
+	else:
+		return None
 
 ####################################################################################################
 def GetVKURL(url):
@@ -26,6 +34,6 @@ def GetVKURL(url):
 	vk_iframe = html.xpath('//iframe[contains(@src, "http://vk.com/video_ext.php")]/@src')
 
 	if len(vk_iframe) < 1:
-		raise Ex.MediaNotAvailable
+		return None
 
 	return vk_iframe[0]

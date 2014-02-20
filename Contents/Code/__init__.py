@@ -16,7 +16,7 @@ def Start():
 	DirectoryObject.thumb = R(ICON)
 
 	HTTP.CacheTime = CACHE_1HOUR
-	HTTP.Headers['User-Agent'] = 'Mozilla/5.0 (iPad; CPU OS 6_1_3 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B329 Safari/8536.25'
+	HTTP.Headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36'
 
 ####################################################################################################
 @handler('/video/clicktoplay', NAME, thumb=ICON, art=ART)
@@ -39,7 +39,7 @@ def Shows(page=1):
 		oc.add(DirectoryObject(
 			key = Callback(Seasons, title=title, thumb=thumb, show_id=show_id),
 			title = title,
-			thumb = Resource.ContentsOfURLWithFallback(url=thumb, fallback='icon-default.jpg')
+			thumb = thumb
 		))
 
 	if len(html.xpath('//span[@class="next"]')) > 0:
@@ -60,7 +60,7 @@ def Seasons(title, thumb, show_id):
 		oc.add(DirectoryObject(
 			key = Callback(Episodes, title='Season %d' % i, show_id=show_id, season=i),
 			title = 'Season %d' % i,
-			thumb = Resource.ContentsOfURLWithFallback(url=thumb, fallback='icon-default.jpg')
+			thumb = thumb
 		))
 
 	return oc
@@ -81,13 +81,16 @@ def Episodes(title, show_id, season):
 		try: index = int(index.split(' ')[-1])
 		except: index = None
 
-		oc.add(EpisodeObject(
-			url = url,
-			title = title,
-			show = show,
-			index = index,
-			season = season,
-			thumb = Resource.ContentsOfURLWithFallback(url=thumb, fallback='icon-default.jpg')
-		))
+		try:
+			oc.add(EpisodeObject(
+				url = url,
+				title = title,
+				show = show,
+				index = index,
+				season = season,
+				thumb = thumb
+			))
+		except:
+			continue
 
 	return oc
