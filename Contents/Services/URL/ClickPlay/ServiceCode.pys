@@ -1,4 +1,8 @@
 HTTP_HEADERS = {
+	'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36'
+}
+
+HTTP_HEADERS_IPAD = {
 	'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 6_1_3 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B329 Safari/8536.25'
 }
 
@@ -31,9 +35,16 @@ def MediaObjectsForURL(url):
 def GetVKURL(url):
 
 	html = HTML.ElementFromURL(url, headers=HTTP_HEADERS)
-	vk_iframe = html.xpath('//iframe[contains(@src, "http://vk.com/video_ext.php")]/@src')
 
-	if len(vk_iframe) < 1:
-		return None
+	for link in html.xpath('//a[contains(@href, "?link_id=")]/@href'):
 
-	return vk_iframe[0]
+		if not link.startswith('http://'):
+			link = '%s%s' % (url, link)
+
+		html = HTML.ElementFromURL(link, headers=HTTP_HEADERS_IPAD)
+		vk_iframe = html.xpath('//iframe[contains(@src, "http://vk.com/video_ext.php")]/@src')
+
+		if len(vk_iframe) > 0:
+			return vk_iframe[0]
+
+	return None
