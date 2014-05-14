@@ -22,6 +22,7 @@ def MetadataObjectForURL(url):
 		return None
 
 ####################################################################################################
+@deferred
 def MediaObjectsForURL(url):
 
 	vk_url = GetVKURL(url)
