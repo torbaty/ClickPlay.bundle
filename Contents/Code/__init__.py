@@ -1,4 +1,4 @@
-NAME = 'רשת'
+NAME = 'RESHET'
 BASE_URL = 'http://reshet.tv/'
 
 SHOWS_URL = '%s/Shows/VOD/page-%%d' % BASE_URL
@@ -19,13 +19,13 @@ def Start():
 	HTTP.Headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36'
 
 ####################################################################################################
-@handler('/video/clicktoplay', NAME, thumb=ICON, art=ART)
+@handler('/video/reshet', NAME, thumb=ICON, art=ART)
 def MainMenu():
 
 	return Shows()
 
 ####################################################################################################
-@route('/video/clicktoplay/shows/{page}', page=int)
+@route('/video/reshet/shows/{page}', page=int)
 def Shows(page=1):
 
 	oc = ObjectContainer()
@@ -49,7 +49,7 @@ def Shows(page=1):
 	return oc
 
 ####################################################################################################
-@route('/video/clicktoplay/seasons/{show_id}')
+@route('/video/reshet/seasons/{show_id}')
 def Seasons(title, thumb, show_id):
 
 	oc = ObjectContainer(title2=title)
@@ -66,7 +66,7 @@ def Seasons(title, thumb, show_id):
 	return oc
 
 ####################################################################################################
-@route('/video/clicktoplay/episodes/{show_id}/{season}', season=int)
+@route('/video/reshet/episodes/{show_id}/{season}', season=int)
 def Episodes(title, show_id, season):
 
 	oc = ObjectContainer(title2=title)
