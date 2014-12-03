@@ -8,7 +8,7 @@
 		<dict>
 			<key>URLPatterns</key>
 			<array>
-				<string>^http://clickplay\.to/tv-shows/.+\-\d+/season\-\d+/episode\-\d+\-\d+</string>
+				<string>^http://reshet\.tv/Shows/VOD/.+\-\d+/season\-\d+/episode\-\d+\-\d+</string>
 			</array>
 		</dict>
 	</dict>
