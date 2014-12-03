@@ -1,9 +1,9 @@
-NAME = 'ClickPlay'
-BASE_URL = 'http://clickplay.to'
+NAME = 'רשת'
+BASE_URL = 'http://reshet.tv/'
 
-SHOWS_URL = '%s/tv-shows/page-%%d' % BASE_URL
-SHOW_URL = '%s/tv-shows/%%s/' % BASE_URL
-SEASON_URL = '%s/tv-shows/%%s/season-%%d/' % BASE_URL
+SHOWS_URL = '%s/Shows/VOD/page-%%d' % BASE_URL
+SHOW_URL = '%s/Shows/VOD/%%s/' % BASE_URL
+SEASON_URL = '%s/Shows/VOD/%%s/season-%%d/' % BASE_URL
 
 ART = 'art-default.jpg'
 ICON = 'icon-default.jpg'
